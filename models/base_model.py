@@ -3,6 +3,7 @@
 """
 import uuid
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
@@ -30,15 +31,16 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key == 'created_at':
                     self.created_at = datetime.strptime(value, format)
-                if key == 'updated_at':
+                elif key == 'updated_at':
                     self.updated_at = datetime.strptime(value, format)
                 else:
-                    if key != __class__:
+                    if key != '__class__':
                         setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         """repr method.
@@ -57,6 +59,7 @@ class BaseModel:
         attribute updated_at with the current datetime.
         """
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """returns a dictionary containing all keys/values of
@@ -73,7 +76,7 @@ class BaseModel:
 
         """
         new_dict = dict(self.__dict__)
+        new_dict['__class__'] = self.__class__.__name__
         new_dict['created_at'] = self.created_at.isoformat()
         new_dict['updated_at'] = self.updated_at.isoformat()
-        new_dict['__class__'] = self.__class__.__name__
         return (new_dict)
