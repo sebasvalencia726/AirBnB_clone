@@ -3,7 +3,7 @@
 """
 import cmd
 import sys
-from models.base_model import *
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
@@ -13,7 +13,11 @@ class HBNBCommand(cmd.Cmd):
     Args:
         cmd (instance): line-oriented interpreter framework
     """
-    prompt = '(hbnb)'
+    def __init__(self):
+        """Constructor that display the prompt (hbnb)
+        """
+        cmd.Cmd.__init__(self)
+        self.prompt = '(hbnb)'
 
     def do_EOF(self, line):
         """EOF implementation
@@ -24,6 +28,17 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program
         """
         raise SystemExit
+
+    def do_create(self, args):
+        """Creates a new instance of BaseModel, saves it
+        (to the JSON file) and prints the id
+        """
+        if len(args) == 0:
+            print('** class name missing **')
+        elif args != 'BaseModel':
+            print("** class doesn't exist **")
+        else:
+            BaseModel().save()
 
 
 if __name__ == '__main__':
