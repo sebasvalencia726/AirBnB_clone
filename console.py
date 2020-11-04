@@ -3,6 +3,7 @@
 """
 import cmd
 import sys
+import json
 from models.base_model import BaseModel
 from models import storage
 
@@ -98,14 +99,28 @@ class HBNBCommand(cmd.Cmd):
         Args:
             args (class): class objects to print.
         """
+        list = []
         all_objs = storage.all()
         args = args.split(' ')
         if args != [''] and args[0] != 'BaseModel':
             print("** class doesn't exist **")
         else:
-            for obj_id in all_objs.keys():
-                obj = all_objs[obj_id]
-                print(obj)
+            for key, value in all_objs.items():
+                dictionary = value.__str__()
+                list.append(dictionary)
+                print(list)
+
+    def do_update(self, args):
+        """Updates an instance based on the class name and
+        id by adding or updating attribute and save the change
+        into the JSON file.
+
+        Args:
+            args (str): Usage: update <class name>
+                           <id> <attribute name> "<attribute value>"
+        """
+        all_objs = storage.all()
+        args = args.split(' ')
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
