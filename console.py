@@ -119,12 +119,37 @@ class HBNBCommand(cmd.Cmd):
             args (str): Usage: update <class name>
                            <id> <attribute name> "<attribute value>"
         """
+        flag = 0
         all_objs = storage.all()
         args = args.split(' ')
+        if args == ['']:
+            print("** class name missing **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        elif len(args) < 3:
+            print("** attribute name missing **")
+        elif len(args) < 4:
+            print("** value missing **")
+        elif args[0] != 'BaseModel':
+            print("class doesn't exist")
+        else:
+            for obj_id in all_objs.keys():
+                obj = all_objs[obj_id]
+                if obj.id == args[1]:
+                    flag = 1
+            if flag == 0:
+                print("** no instance found **")
+            for key in all_objs.keys():
+                obj = all_objs[key]
+                if hasattr(obj, args[2]) is False:
+                    break
+                else:
+                    obj.args[2] = args[3]
+            print("** value missing **")
+
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
         args = sys.argv
-        args = args.split(separator=' ')
     else:
         HBNBCommand().cmdloop()
