@@ -39,8 +39,11 @@ class HBNBCommand(cmd.Cmd):
         raise SystemExit
 
     def do_create(self, line):
-        """Creates a new instance of BaseModel or User, saves it
-        (to the JSON file) and prints the id
+        """Creates a new instance of BaseModel and its inherits classes,
+        and saves it (to the JSON file) and prints the id
+
+        Inherit classe:
+            User, State, City, Amenity, Place and Review.
         """
         if len(line) == 0:
             print('** class name missing **')
