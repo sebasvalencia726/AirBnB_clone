@@ -5,6 +5,7 @@ import cmd
 import sys
 import json
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 
 
@@ -33,17 +34,22 @@ class HBNBCommand(cmd.Cmd):
         raise SystemExit
 
     def do_create(self, line):
-        """Creates a new instance of BaseModel, saves it
+        """Creates a new instance of BaseModel or User, saves it
         (to the JSON file) and prints the id
         """
         if len(line) == 0:
             print('** class name missing **')
-        elif line != 'BaseModel':
-            print("** class doesn't exist **")
-        else:
+        elif line == 'BaseModel':
             new = BaseModel()
             new.save()
             print(new.id)
+        elif line == 'User':
+            new = User()
+            new.save()
+            print(new.id)
+        else:
+            print("** class doesn't exist **")
+
 
     def do_show(self, args):
         """Prints the string representation of an instance
@@ -58,15 +64,15 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif len(args) < 2:
             print("** instance id missing **")
-        elif args[0] != 'BaseModel':
-            print("class doesn't exist")
-        elif args[1]:
+        elif args[0] == 'BaseModel' or args[0] == 'User':
             for obj_id in all_objs.keys():
                 obj = all_objs[obj_id]
                 if obj.id == args[1]:
                     print(obj)
                     return
             print("** no instance found **")
+        else:
+            print("class doesn't exist")
 
     def do_destroy(self, args):
         """Deletes an instance based on the class name and
@@ -81,9 +87,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif len(args) < 2:
             print("** instance id missing **")
-        elif args[0] != 'BaseModel':
-            print("class doesn't exist")
-        elif args[1]:
+        elif args[0] == 'BaseModel' or args[0] == 'User':
             for obj_id in all_objs.keys():
                 obj = all_objs[obj_id]
                 if obj.id == args[1]:
@@ -91,6 +95,8 @@ class HBNBCommand(cmd.Cmd):
                     obj.save()
                     return
             print("** no instance found **")
+        else:
+            print("class doesn't exist")
 
     def do_all(self, args):
         """Prints all string representation of all instances
@@ -102,13 +108,13 @@ class HBNBCommand(cmd.Cmd):
         list = []
         all_objs = storage.all()
         args = args.split(' ')
-        if args != [''] and args[0] != 'BaseModel':
-            print("** class doesn't exist **")
-        else:
+        if args == [''] or args[0] == 'BaseModel' or args[0] == 'User':
             for key, value in all_objs.items():
                 dictionary = value.__str__()
                 list.append(dictionary)
                 print(list)
+        else:
+            print("** class doesn't exist **")
 
     def do_update(self, args):
         """Updates an instance based on the class name and
@@ -130,9 +136,7 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         elif len(args) < 4:
             print("** value missing **")
-        elif args[0] != 'BaseModel':
-            print("class doesn't exist")
-        else:
+        elif args[0] == 'BaseModel' or args[0] == 'User':
             for obj_id in all_objs.keys():
                 obj = all_objs[obj_id]
                 if obj.id == args[1]:
@@ -144,8 +148,18 @@ class HBNBCommand(cmd.Cmd):
                 if hasattr(obj, args[2]) is False:
                     break
                 else:
-                    obj.args[2] = args[3]
-            print("** value missing **")
+                    if args[2] == 'email':
+                        obj.email = args[3]
+                    elif args[2] == 'password':
+                        obj.password = args[3]
+                    elif args[2] == 'first_name':
+                        obj.first_name = args[3]
+                    elif args[2] == 'last_name':
+                        obj.last_name = args[3]
+                    else:
+                        print("** value missing **")
+        else:
+            print("class doesn't exist")
 
 
 if __name__ == '__main__':

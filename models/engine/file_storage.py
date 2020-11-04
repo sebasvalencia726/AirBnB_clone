@@ -55,7 +55,12 @@ class FileStorage():
             with open(self.__file_path, 'r') as f:
                 diccionario = json.load(f)
             from models.base_model import BaseModel
+            from models.user import User
             for key, value in diccionario.items():
-                self.__objects[key] = BaseModel(**value)
+                temp = key.split(".")
+                if temp[0] == "BaseModel":
+                    self.__objects[key] = BaseModel(**value)
+                elif temp[0] == "User":
+                    self.__objects[key] = User(**value)
         except FileNotFoundError:
             pass
