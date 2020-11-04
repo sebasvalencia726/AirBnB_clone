@@ -19,3 +19,14 @@ class TestBaseModel(unittest.TestCase):
         functions = inspect.getmembers(BaseModel, predicate=inspect.isfunction)
         for name, func in functions:
             self.assertTrue(len(func.__doc__.strip()) > 0)
+
+    def test_class_type(self):
+        """Checking BaseModel class type
+        """
+        my_model = BaseModel()
+        self.assertEqual(str(type(my_model)),
+                         "<class 'models.base_model.BaseModel'>")
+
+
+if __name__ == '__main__':
+    unittest.main()
