@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-"""State module
+"""City module
 """
 from .base_model import BaseModel
 
 
-class State(BaseModel):
-    """class State that inherits from BaseModel
+class City(BaseModel):
+    """class City that inherits from BaseModel
 
     Args:
         BaseModel (class): parent class
@@ -15,7 +15,10 @@ class State(BaseModel):
         """Constructor
 
         Args: Public class attributes.
+            state_id: string - empty string: it will be the State.id
             name: string - empty string
+
         """
-        super(State, self).__init__(*args, **kwargs)
+        super(City, self).__init__(*args, **kwargs)
+        self.state_id = ''
         self.name = ''

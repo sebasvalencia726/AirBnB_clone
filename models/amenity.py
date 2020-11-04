@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-"""State module
+"""Amenity module
 """
 from .base_model import BaseModel
 
 
-class State(BaseModel):
-    """class State that inherits from BaseModel
+class Amenity(BaseModel):
+    """class Amenity that inherits from BaseModel
 
     Args:
         BaseModel (class): parent class
@@ -16,6 +16,7 @@ class State(BaseModel):
 
         Args: Public class attributes.
             name: string - empty string
+
         """
-        super(State, self).__init__(*args, **kwargs)
+        super(Amenity, self).__init__(*args, **kwargs)
         self.name = ''
