@@ -6,6 +6,11 @@ import sys
 import json
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 from models import storage
 
 
@@ -47,6 +52,26 @@ class HBNBCommand(cmd.Cmd):
             new = User()
             new.save()
             print(new.id)
+        elif line == 'State':
+            new = State()
+            new.save()
+            print(new.id)
+        elif line == 'City':
+            new = City()
+            new.save()
+            print(new.id)
+        elif line == 'Amenity':
+            new = Amenity()
+            new.save()
+            print(new.id)
+        elif line == 'Place':
+            new = Place()
+            new.save()
+            print(new.id)
+        elif line == 'Review':
+            new = Review()
+            new.save()
+            print(new.id)
         else:
             print("** class doesn't exist **")
 
@@ -64,7 +89,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif len(args) < 2:
             print("** instance id missing **")
-        elif args[0] == 'BaseModel' or args[0] == 'User':
+        elif args[0] == 'BaseModel' or args[0] == 'User'\
+            or args[0] == 'State' or args[0] == 'City'\
+            or args[0] == 'Amenity' or args[0] == 'Place'\
+            or args[0] == 'Review':
             for obj_id in all_objs.keys():
                 obj = all_objs[obj_id]
                 if obj.id == args[1]:
@@ -87,7 +115,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif len(args) < 2:
             print("** instance id missing **")
-        elif args[0] == 'BaseModel' or args[0] == 'User':
+        elif args[0] == 'BaseModel' or args[0] == 'User'\
+            or args[0] == 'State' or args[0] == 'City'\
+            or args[0] == 'Amenity' or args[0] == 'Place'\
+            or args[0] == 'Review':
             for obj_id in all_objs.keys():
                 obj = all_objs[obj_id]
                 if obj.id == args[1]:
@@ -108,7 +139,10 @@ class HBNBCommand(cmd.Cmd):
         list = []
         all_objs = storage.all()
         args = args.split(' ')
-        if args == [''] or args[0] == 'BaseModel' or args[0] == 'User':
+        if args == [''] or args[0] == 'BaseModel' or args[0] == 'User'\
+            or args[0] == 'State' or args[0] == 'City'\
+            or args[0] == 'Amenity' or args[0] == 'Place'\
+            or args[0] == 'Review':
             for key, value in all_objs.items():
                 dictionary = value.__str__()
                 list.append(dictionary)
@@ -136,7 +170,10 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         elif len(args) < 4:
             print("** value missing **")
-        elif args[0] == 'BaseModel' or args[0] == 'User':
+        elif args[0] == 'BaseModel' or args[0] == 'User'\
+            or args[0] == 'State' or args[0] == 'City'\
+            or args[0] == 'Amenity' or args[0] == 'Place'\
+            or args[0] == 'Review':
             for obj_id in all_objs.keys():
                 obj = all_objs[obj_id]
                 if obj.id == args[1]:
@@ -156,6 +193,24 @@ class HBNBCommand(cmd.Cmd):
                         obj.first_name = args[3]
                     elif args[2] == 'last_name':
                         obj.last_name = args[3]
+                    elif args[2] == 'name':
+                        obj.name = args[3]
+                    elif args[2] == 'description':
+                        obj.description = args[3]
+                    elif args[2] == 'number_rooms':
+                        obj.number_rooms = args[3]
+                    elif args[2] == 'number_bathrooms':
+                        obj.number_bathrooms = args[3]
+                    elif args[2] == 'max_guest':
+                        obj.max_guest = args[3]
+                    elif args[2] == 'price_by_night':
+                        obj.price_by_night = args[3]
+                    elif args[2] == 'latitude':
+                        obj.latitude = args[3]
+                    elif args[2] == 'longitude':
+                        obj.longitude = args[3]
+                    elif args[2] == 'text':
+                        obj.text = args[3]
                     else:
                         print("** value missing **")
         else:
