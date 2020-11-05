@@ -27,6 +27,13 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(str(type(my_model)),
                          "<class 'models.base_model.BaseModel'>")
 
+    def test_type_created_at(self):
+        """created at method test type
+        """
+        my_model = BaseModel()
+        self.assertEqual(str(type(my_model.created_at)),
+                         "<class 'datetime.datetime'>")
+
 
 if __name__ == '__main__':
     unittest.main()
