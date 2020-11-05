@@ -3,6 +3,7 @@
 """
 import cmd
 import sys
+import models
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -26,6 +27,10 @@ class HBNBCommand(cmd.Cmd):
         cmd.Cmd.__init__(self)
         self.prompt = '(hbnb) '
         self.args = args
+
+    def emptyline(self):
+        """When you use ENTER after a command it doesn't print anything"""
+        pass
 
     def do_EOF(self, arg):
         """EOF implementation
