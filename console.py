@@ -89,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
         Args:
             args (str): class name and id of the instance.
         """
-        all_objs = storage.all()
+        all_objs = models.storage.all()
         args = args.split(' ')
         if args == ['']:
             print("** class name missing **")
@@ -115,7 +115,7 @@ class HBNBCommand(cmd.Cmd):
         Args:
             args (str): class name and id to delete.
         """
-        all_objs = storage.all()
+        all_objs = models.storage.all()
         args = args.split(' ')
         if args == ['']:
             print("** class name missing **")
@@ -129,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
                 obj = all_objs[obj_id]
                 if obj.id == args[1]:
                     del(all_objs[obj_id])
-                    obj.save()
+                    models.storage.save()
                     return
             print("** no instance found **")
         else:
@@ -143,7 +143,7 @@ class HBNBCommand(cmd.Cmd):
             args (class): class objects to print.
         """
         list = []
-        all_objs = storage.all()
+        all_objs = models.storage.all()
         args = args.split(' ')
         if args == [''] or args[0] == 'BaseModel' or args[0] == 'User'\
             or args[0] == 'State' or args[0] == 'City'\
@@ -166,7 +166,7 @@ class HBNBCommand(cmd.Cmd):
                            <id> <attribute name> "<attribute value>"
         """
         flag = 0
-        all_objs = storage.all()
+        all_objs = models.storage.all()
         args = args.split(' ')
         if args == ['']:
             print("** class name missing **")
