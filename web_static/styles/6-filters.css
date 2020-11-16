@@ -1,0 +1,89 @@
+.filters {
+    color: white;
+    height: 70px;
+    width: 100%;
+    border: 1px solid #DDDDDD;
+}
+.locations {
+    float: left;
+    width: 25%;
+    height: 100%;
+    border-right: 1px solid #DDDDDD;
+    margin-left: 30px;
+    align-items: center;
+    display: table;
+}
+.amenities {
+    float: left;
+    width: 25%;
+    height: 100%;
+    margin-left: 30px;
+    align-items: center;
+}
+.popover {
+    border: 1px solid #DDDDDD;
+    width: 100%;
+    color: #FAFAFA;
+    display: table-cell;
+    height: 100%;
+}
+button {
+    align-items: center;
+    font-size: 18px;
+    background-color: #FF5A5F;
+    height: 48px;
+    width: 20%;
+    border-radius: 4px;
+    float: right;
+    margin-right: 30px ;
+    transform: translateY(20%);
+}
+button > p {
+    color: #FFFFFF;
+}
+button:hover{
+    opacity: 0.9;
+}
+ul > h2 {
+    font-size: 16px;
+}
+ul > h4 {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 0;
+    text-indent: 20px;
+}
+div > h3 {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 0.7;
+
+}
+div > h4 {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 0;
+}
+.locations > ul{
+    display: none;
+    font-size: 16px;
+    position: relative;
+    color: #FAFAFA;
+    width: 100%;
+}
+.locations > ul:after {
+    position: absolute;
+}
+.locations:hover ul {
+    display: block;
+}
+.amenities > ul{
+    display: none;
+    position: relative;
+}
+.amenities > ul:after {
+    position: absolute;
+}
+.amenities:hover ul {
+    display: block;
+}
