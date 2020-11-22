@@ -22,12 +22,13 @@
 }
 .popover {
     border: 1px solid #DDDDDD;
-    width: auto;
+    width: 100%;
     background-color: #FAFAFA;
     overflow: hidden;
-    position: absolute;
-    left: 0;
-    right: 0;
+    position: relative;
+    left: -31px;
+    bottom: -6px;
+    right: -50px;
     white-space: nowrap;
     text-overflow: ellipsis;
     display: inline-block;
