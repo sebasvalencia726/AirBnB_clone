@@ -24,7 +24,6 @@ class BaseModel:
             updated_at: (datetime) - assign with the current datetime when an
             instance is created and it will be updated every time you change
             your object.
-
         """
         format = '%Y-%m-%dT%H:%M:%S.%f'
         if kwargs:
@@ -47,7 +46,6 @@ class BaseModel:
 
         Args:
             None
-
         """
         representation = "[%s] (%s) %s" % (self.__class__.__name__,
                                            self.id,
